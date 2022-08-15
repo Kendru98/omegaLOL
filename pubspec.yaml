@@ -1,0 +1,38 @@
+name: omega_lul
+description: A new Flutter project.
+
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.17.6 <3.0.0"
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  cupertino_icons: ^1.0.2
+  google_fonts: ^3.0.1
+  dio: ^4.0.6
+  retrofit: ^3.0.1+1
+  json_annotation: ^4.6.0
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  json_serializable: '>4.4.0'
+  flutter_lints: ^2.0.0
+  retrofit_generator: '>=4.0.0 <5.0.0'
+  build_runner: ^2.2.0
+
+flutter:
+
+ 
+  uses-material-design: true
+
+  
