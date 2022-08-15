@@ -34,7 +34,7 @@ migrate_working_dir/
 
 #apikey
 lib/apikey.dart
-
+lib/api/*.g.dart
 # Web related
 lib/generated_plugin_registrant.dart
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:omega_lul/pages/homepage.dart';
+import 'package:omega_lul/pages/firstpage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'Omega LOL',
-      home: HomePage(),
+      home: FirstPage(),
     );
   }
 }
