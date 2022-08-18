@@ -21,6 +21,6 @@ Map<String, dynamic> _$StyleToJson(Style instance) => <String, dynamic>{
     };
 
 const _$DescriptionEnumMap = {
-  Description.primary_style: 'primary_style',
-  Description.sub_style: 'sub_style',
+  Description.primarystyle: 'primaryStyle',
+  Description.substyle: 'subStyle',
 };

@@ -34,10 +34,26 @@ class MyTheme {
     ),
   );
 
+  static final textdmSans14w400 = GoogleFonts.dmSans(
+    textStyle: const TextStyle(
+      color: Colors.black,
+      fontSize: 14,
+      fontWeight: FontWeight.w400,
+    ),
+  );
+
   static final textPoppins46w700 = GoogleFonts.poppins(
     textStyle: const TextStyle(
       color: MyColors.white,
       fontSize: 46,
+      fontWeight: FontWeight.w700,
+    ),
+  );
+
+  static final textTitle16w700 = GoogleFonts.poppins(
+    textStyle: const TextStyle(
+      color: MyColors.white,
+      fontSize: 18,
       fontWeight: FontWeight.w700,
     ),
   );

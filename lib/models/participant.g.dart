@@ -77,7 +77,7 @@ Participant _$ParticipantFromJson(Map<String, dynamic> json) => Participant(
       quadraKills: json['quadraKills'] as int,
       riotIdName: json['riotIdName'] as String,
       riotIdTagline: json['riotIdTagline'] as String,
-      role: json['role'] as String,
+      role: $enumDecode(_$RoleEnumMap, json['role']),
       sightWardsBoughtInGame: json['sightWardsBoughtInGame'] as int,
       spell1Casts: json['spell1Casts'] as int,
       spell2Casts: json['spell2Casts'] as int,
@@ -103,7 +103,7 @@ Participant _$ParticipantFromJson(Map<String, dynamic> json) => Participant(
       totalHeal: json['totalHeal'] as int,
       totalHealsOnTeammates: json['totalHealsOnTeammates'] as int,
       totalMinionsKilled: json['totalMinionsKilled'] as int,
-      totalTimeCcDealt: json['totalTimeCcDealt'] as int,
+      totalTimeCCDealt: json['totalTimeCCDealt'] as int,
       totalTimeSpentDead: json['totalTimeSpentDead'] as int,
       totalUnitsHealed: json['totalUnitsHealed'] as int,
       tripleKills: json['tripleKills'] as int,
@@ -190,7 +190,7 @@ Map<String, dynamic> _$ParticipantToJson(Participant instance) =>
       'quadraKills': instance.quadraKills,
       'riotIdName': instance.riotIdName,
       'riotIdTagline': instance.riotIdTagline,
-      'role': instance.role,
+      'role': _$RoleEnumMap[instance.role]!,
       'sightWardsBoughtInGame': instance.sightWardsBoughtInGame,
       'spell1Casts': instance.spell1Casts,
       'spell2Casts': instance.spell2Casts,
@@ -215,7 +215,7 @@ Map<String, dynamic> _$ParticipantToJson(Participant instance) =>
       'totalHeal': instance.totalHeal,
       'totalHealsOnTeammates': instance.totalHealsOnTeammates,
       'totalMinionsKilled': instance.totalMinionsKilled,
-      'totalTimeCcDealt': instance.totalTimeCcDealt,
+      'totalTimeCCDealt': instance.totalTimeCCDealt,
       'totalTimeSpentDead': instance.totalTimeSpentDead,
       'totalUnitsHealed': instance.totalUnitsHealed,
       'tripleKills': instance.tripleKills,
@@ -232,3 +232,12 @@ Map<String, dynamic> _$ParticipantToJson(Participant instance) =>
       'wardsPlaced': instance.wardsPlaced,
       'win': instance.win,
     };
+
+const _$RoleEnumMap = {
+  Role.support: 'SUPPORT',
+  Role.duo: 'DUO',
+  Role.solo: 'SOLO',
+  Role.none: 'NONE',
+  Role.carry: 'CARRY',
+  Role.top: 'TOP',
+};

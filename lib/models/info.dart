@@ -2,11 +2,11 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:omega_lul/models/participant.dart';
 import 'package:omega_lul/models/team.dart';
 
-part 'match_data.g.dart';
+part 'info.g.dart';
 
 @JsonSerializable()
-class MatchData {
-  MatchData({
+class Info {
+  Info({
     required this.gameCreation,
     required this.gameDuration,
     required this.gameEndTimestamp,
@@ -21,6 +21,7 @@ class MatchData {
     required this.platformId,
     required this.queueId,
     required this.teams,
+    required this.tournamentCode,
   });
 
   int gameCreation;
@@ -37,7 +38,7 @@ class MatchData {
   String platformId;
   int queueId;
   List<Team> teams;
+  String tournamentCode;
 
-  factory MatchData.fromJson(Map<String, dynamic> json) =>
-      _$MatchDataFromJson(json);
+  factory Info.fromJson(Map<String, dynamic> json) => _$InfoFromJson(json);
 }

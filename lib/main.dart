@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:omega_lul/pages/firstpage.dart';
+import 'package:omega_lul/provider.dart/matches_provider.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,9 +12,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Omega LOL',
-      home: FirstPage(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => MatchesProvider())
+      ],
+      child: const MaterialApp(
+        title: 'Omega LOL',
+        home: FirstPage(),
+      ),
     );
   }
 }

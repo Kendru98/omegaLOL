@@ -6,11 +6,12 @@ part 'team.g.dart';
 @JsonSerializable()
 class Team {
   Team({
+    required this.bans,
     required this.objectives,
     required this.teamId,
     required this.win,
   });
-
+  List<dynamic> bans;
   Objectives objectives;
   int teamId;
   bool win;

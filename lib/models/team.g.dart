@@ -7,6 +7,7 @@ part of 'team.dart';
 // **************************************************************************
 
 Team _$TeamFromJson(Map<String, dynamic> json) => Team(
+      bans: json['bans'] as List<dynamic>,
       objectives:
           Objectives.fromJson(json['objectives'] as Map<String, dynamic>),
       teamId: json['teamId'] as int,
@@ -14,6 +15,7 @@ Team _$TeamFromJson(Map<String, dynamic> json) => Team(
     );
 
 Map<String, dynamic> _$TeamToJson(Team instance) => <String, dynamic>{
+      'bans': instance.bans,
       'objectives': instance.objectives,
       'teamId': instance.teamId,
       'win': instance.win,

@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'match_data.dart';
+part of 'info.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-MatchData _$MatchDataFromJson(Map<String, dynamic> json) => MatchData(
+Info _$InfoFromJson(Map<String, dynamic> json) => Info(
       gameCreation: json['gameCreation'] as int,
       gameDuration: json['gameDuration'] as int,
       gameEndTimestamp: json['gameEndTimestamp'] as int,
@@ -25,9 +25,10 @@ MatchData _$MatchDataFromJson(Map<String, dynamic> json) => MatchData(
       teams: (json['teams'] as List<dynamic>)
           .map((e) => Team.fromJson(e as Map<String, dynamic>))
           .toList(),
+      tournamentCode: json['tournamentCode'] as String,
     );
 
-Map<String, dynamic> _$MatchDataToJson(MatchData instance) => <String, dynamic>{
+Map<String, dynamic> _$InfoToJson(Info instance) => <String, dynamic>{
       'gameCreation': instance.gameCreation,
       'gameDuration': instance.gameDuration,
       'gameEndTimestamp': instance.gameEndTimestamp,
@@ -42,4 +43,5 @@ Map<String, dynamic> _$MatchDataToJson(MatchData instance) => <String, dynamic>{
       'platformId': instance.platformId,
       'queueId': instance.queueId,
       'teams': instance.teams,
+      'tournamentCode': instance.tournamentCode,
     };

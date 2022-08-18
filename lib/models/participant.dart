@@ -3,6 +3,21 @@ import 'package:omega_lul/models/perks.dart';
 
 part 'participant.g.dart';
 
+enum Role {
+  @JsonValue('SUPPORT')
+  support,
+  @JsonValue('DUO')
+  duo,
+  @JsonValue('SOLO')
+  solo,
+  @JsonValue('NONE')
+  none,
+  @JsonValue('CARRY')
+  carry,
+  @JsonValue('TOP')
+  top,
+}
+
 @JsonSerializable()
 class Participant {
   Participant({
@@ -98,7 +113,7 @@ class Participant {
     required this.totalHeal,
     required this.totalHealsOnTeammates,
     required this.totalMinionsKilled,
-    required this.totalTimeCcDealt,
+    required this.totalTimeCCDealt,
     required this.totalTimeSpentDead,
     required this.totalUnitsHealed,
     required this.tripleKills,
@@ -182,7 +197,7 @@ class Participant {
   int quadraKills;
   String riotIdName;
   String riotIdTagline;
-  String role;
+  Role role;
   int sightWardsBoughtInGame;
   int spell1Casts;
   int spell2Casts;
@@ -207,7 +222,7 @@ class Participant {
   int totalHeal;
   int totalHealsOnTeammates;
   int totalMinionsKilled;
-  int totalTimeCcDealt;
+  int totalTimeCCDealt;
   int totalTimeSpentDead;
   int totalUnitsHealed;
   int tripleKills;

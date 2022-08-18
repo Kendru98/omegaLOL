@@ -3,7 +3,12 @@ import 'package:omega_lul/models/selection.dart';
 
 part 'style.g.dart';
 
-enum Description { primary_style, sub_style }
+enum Description {
+  @JsonValue('primaryStyle')
+  primarystyle,
+  @JsonValue('subStyle')
+  substyle,
+}
 
 @JsonSerializable()
 class Style {

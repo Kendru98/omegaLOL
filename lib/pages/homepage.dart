@@ -1,102 +1,58 @@
 import 'package:flutter/material.dart';
+import 'package:omega_lul/models/info.dart';
+import 'package:omega_lul/provider.dart/matches_provider.dart';
 import 'package:omega_lul/utils/my_colors.dart';
 import 'package:omega_lul/utils/my_theme.dart';
 import 'package:omega_lul/widgets/background_container.dart';
+import 'package:omega_lul/widgets/centered_view.dart';
 import 'package:omega_lul/widgets/element_container.dart';
+import 'package:omega_lul/widgets/match_data_tile.dart';
+import 'package:omega_lul/widgets/top_bar.dart';
+import 'package:provider/provider.dart';
+import 'package:tuple/tuple.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final provider = context.read<MatchesProvider>();
     return Scaffold(
       backgroundColor: MyColors.siteBackground,
       body: BackgroundContainer(
+        //singlechildscrollview
         child: Column(
           children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ElementContainer(
-                  child: Column(
-                    children: [
-                      Text(
-                        'Chemp Stats',
-                        style: MyTheme.textCairo64,
-                      ),
-                      Text(
-                        'Darius',
-                        style: MyTheme.textdmSans46w400,
-                      ),
-                      Text(
-                        'Ashe',
-                        style: MyTheme.textdmSans46w400,
-                      ),
-                      Text(
-                        'Leona',
-                        style: MyTheme.textdmSans46w400,
-                      ),
-                    ],
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+            const CenteredView(
+              child: TopBar(),
+            ),
+            CenteredView(
+              child: ElementContainer(
+                child: Column(
                   children: [
-                    Text(
-                      'OmegaLOL',
-                      style: MyTheme.textPoppins46w500,
-                    ),
-                    const SizedBox(
-                      width: 200, //?
-                    ),
-                    Container(
-                      width: 300,
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: TextField(
-                        onSubmitted: ((value) {}),
-                        cursorColor: Colors.grey,
-                        decoration: InputDecoration(
-                          prefixIcon: const Icon(Icons.search),
-                          fillColor: MyColors.textFieldFill,
-                          filled: true,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16),
-                            borderSide: BorderSide.none,
-                          ),
-                          hintText: 'Search here',
-                        ),
+                    Selector<MatchesProvider,
+                        Tuple2<List<Info>?, List<String>>>(
+                      selector: (_, provider) => Tuple2(
+                        provider.getMatchData(),
+                        provider.matchesIds,
                       ),
-                    ),
-                    const SizedBox(
-                      width: 200, //?
-                    ),
-                    const Icon(
-                      Icons.abc_sharp,
-                      size: 40,
-                      color: Colors.white,
-                    ),
-                    const Icon(
-                      Icons.abc_sharp,
-                      size: 40,
-                      color: Colors.white,
-                    ),
-                    const Icon(
-                      Icons.abc_sharp,
-                      size: 40,
-                      color: Colors.white,
-                    ),
+                      builder: (context, matchData, child) {
+                        if (matchData.item1 == null) {
+                          return const CircularProgressIndicator();
+                        }
+                        return ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: matchData.item2.length,
+                          itemBuilder: (context, matchIndex) {
+                            return MatchDataTile(
+                              matchData: matchData.item1![matchIndex],
+                            );
+                          },
+                        );
+                      },
+                    )
                   ],
                 ),
-              ],
-            ),
-            ElementContainer(
-              child: Column(
-                children: [
-                  Text(
-                    'data',
-                    style: MyTheme.textPoppins46w700,
-                  )
-                ],
               ),
             ),
           ],
