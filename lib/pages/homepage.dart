@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:omega_lul/models/info.dart';
 import 'package:omega_lul/provider.dart/matches_provider.dart';
 import 'package:omega_lul/utils/my_colors.dart';
-import 'package:omega_lul/utils/my_theme.dart';
 import 'package:omega_lul/widgets/background_container.dart';
 import 'package:omega_lul/widgets/centered_view.dart';
 import 'package:omega_lul/widgets/element_container.dart';
@@ -16,18 +15,16 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = context.read<MatchesProvider>();
     return Scaffold(
       backgroundColor: MyColors.siteBackground,
       body: BackgroundContainer(
-        //singlechildscrollview
-        child: Column(
-          children: [
-            const CenteredView(
-              child: TopBar(),
-            ),
-            CenteredView(
-              child: ElementContainer(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const CenteredView(
+                child: TopBar(),
+              ),
+              CenteredView(
                 child: Column(
                   children: [
                     Selector<MatchesProvider,
@@ -44,8 +41,11 @@ class HomePage extends StatelessWidget {
                           shrinkWrap: true,
                           itemCount: matchData.item2.length,
                           itemBuilder: (context, matchIndex) {
-                            return MatchDataTile(
-                              matchData: matchData.item1![matchIndex],
+                            return ElementContainer(
+                              padding: 16,
+                              child: MatchDataTile(
+                                matchData: matchData.item1![matchIndex],
+                              ),
                             );
                           },
                         );
@@ -54,8 +54,8 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

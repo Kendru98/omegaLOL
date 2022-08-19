@@ -26,13 +26,13 @@ class TopBar extends StatelessWidget {
 class _TopBarItem extends StatelessWidget {
   final String title;
 
-  const _TopBarItem({super.key, required this.title});
+  const _TopBarItem({required this.title});
 
   @override
   Widget build(BuildContext context) {
     return Text(
       title,
-      style: MyTheme.textPoppins46w500,
+      style: MyTheme.textCairo64,
     );
   }
 }

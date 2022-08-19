@@ -1,6 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:omega_lul/models/info.dart';
+import 'package:omega_lul/models/participant.dart';
+import 'package:omega_lul/provider.dart/matches_provider.dart';
+import 'package:omega_lul/utils/data_conversion.dart';
 import 'package:omega_lul/utils/my_theme.dart';
+import 'package:provider/provider.dart';
 
 class MatchDataTile extends StatelessWidget {
   const MatchDataTile({
@@ -9,18 +14,113 @@ class MatchDataTile extends StatelessWidget {
   }) : super(key: key);
 
   final Info matchData;
+
   @override
   Widget build(BuildContext context) {
-    return Column(
+    final dataConv = DataConversion();
+    final provider = context.read<MatchesProvider>();
+    int userIndex = matchData.participants
+        .indexWhere((element) => element.puuid == provider.userPuuid);
+    Participant currentPart = matchData.participants[userIndex];
+
+    print(
+      'https://ddragon.canisback.com/img/${DataConversion.choosePath(currentPart.perks.styles[1].style, currentPart.perks.styles[1].selections[1].perk, context)}',
+    );
+    return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        SizedBox(
+          width: 150,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text(
+                matchData.queueId.queueTranslation(),
+                style: MyTheme.textTitle16w700,
+              ),
+              currentPart.win
+                  ? Text(
+                      'WIN',
+                      style: MyTheme.textTitle16w600G,
+                    )
+                  : Text(
+                      'LOST',
+                      style: MyTheme.textTitle16w600R,
+                    ),
+              Text(
+                ('${Duration(minutes: matchData.gameDuration).toString().substring(0, 5)}m'),
+                style: MyTheme.textTitle16w400,
+              ),
+              Text(
+                dataConv.readTimestamp(matchData.gameEndTimestamp),
+                style: MyTheme.textTitle16w400,
+              )
+            ],
+          ),
+        ),
+        const SizedBox(width: 10),
+        Column(
           children: [
-            Text(matchData.gameMode, style: MyTheme.textTitle16w700),
+            Row(
+              children: [
+                Image(
+                  width: 24,
+                  height: 24,
+                  image: AssetImage(
+                      'icons/spell/${DataConversion.summonerSpells[currentPart.summoner1Id]}'),
+                ),
+                Image(
+                  width: 24,
+                  height: 24,
+                  image: AssetImage(
+                      'icons/spell/${DataConversion.summonerSpells[currentPart.summoner2Id]}'),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                CachedNetworkImage(
+                  width: 48,
+                  height: 48,
+                  imageUrl:
+                      'http://ddragon.leagueoflegends.com/cdn/12.15.1/img/champion/${currentPart.championName}.png',
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                CachedNetworkImage(
+// P/Kill 46%
+// Control Ward 3
+// CS 128 (3.8)
+// Gold 3
+                  width: 24,
+                  height: 24,
+                  fit: BoxFit.cover,
+                  imageUrl:
+                      'https://ddragon.canisback.com/img/${DataConversion.choosePath(currentPart.perks.styles[0].style, currentPart.perks.styles[0].selections[0].perk, context)}',
+                ),
+                CachedNetworkImage(
+                  width: 24,
+                  height: 24,
+                  fit: BoxFit.cover,
+                  imageUrl:
+                      'https://ddragon.canisback.com/img/${DataConversion.choosePathSecond(currentPart.perks.styles[1].style, context)}',
+                ),
+              ],
+            ),
+          ],
+        ),
+        Column(
+          children: [
             Text(
-                ('${Duration(minutes: matchData.gameDuration).toString().substring(0, 7)}m'),
-                style: MyTheme.textTitle16w700),
+              '${currentPart.kills} / ${currentPart.deaths} / ${currentPart.assists}',
+              style: MyTheme.textTitle16w600G,
+            ),
+            Text(
+              '${((currentPart.kills + currentPart.assists) / currentPart.deaths).toStringAsPrecision(2)} KDA',
+              style: MyTheme.textTitle16w600R,
+            )
           ],
         )
       ],

@@ -21,7 +21,7 @@ Info _$InfoFromJson(Map<String, dynamic> json) => Info(
           .map((e) => Participant.fromJson(e as Map<String, dynamic>))
           .toList(),
       platformId: json['platformId'] as String,
-      queueId: json['queueId'] as int,
+      queueId: $enumDecode(_$QueueEnumEnumMap, json['queueId']),
       teams: (json['teams'] as List<dynamic>)
           .map((e) => Team.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -41,7 +41,20 @@ Map<String, dynamic> _$InfoToJson(Info instance) => <String, dynamic>{
       'mapId': instance.mapId,
       'participants': instance.participants,
       'platformId': instance.platformId,
-      'queueId': instance.queueId,
+      'queueId': _$QueueEnumEnumMap[instance.queueId]!,
       'teams': instance.teams,
       'tournamentCode': instance.tournamentCode,
     };
+
+const _$QueueEnumEnumMap = {
+  QueueEnum.normaldraft: 400,
+  QueueEnum.ranked: 420,
+  QueueEnum.normalblind: 430,
+  QueueEnum.rankedflex: 440,
+  QueueEnum.aram: 450,
+  QueueEnum.clash: 700,
+  QueueEnum.introbotgame: 830,
+  QueueEnum.beginnerbots: 840,
+  QueueEnum.intermediatebots: 850,
+  QueueEnum.arurf: 900,
+};

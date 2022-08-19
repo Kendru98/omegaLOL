@@ -1,10 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:omega_lul/api/matches_api.dart';
+import 'package:omega_lul/api/runes_api.dart';
 import 'package:omega_lul/api/user_api.dart';
 import 'package:omega_lul/apikey.dart';
 import 'package:omega_lul/models/main_data.dart';
 import 'package:omega_lul/models/info.dart';
+import 'package:omega_lul/models/runes/rune_main.dart';
 
 class MatchesProvider extends ChangeNotifier {
   final List<Info> _matchDataList = [];
@@ -22,11 +24,14 @@ class MatchesProvider extends ChangeNotifier {
   List<String> _matchesIds = [];
   List<String> get matchesIds => _matchesIds;
 
-  Map<String, List<Info>> _matchData = {};
+  final Map<String, List<Info>> _matchData = {};
   Map<String, List<Info>> get matchData => _matchData;
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
+
+  List<RuneMain> _runesInfo = [];
+  List<RuneMain> get runesInfo => _runesInfo;
 
   List<Info>? getMatchData() {
     _isLoading = true;
@@ -39,6 +44,18 @@ class MatchesProvider extends ChangeNotifier {
 
     print(matchDataList);
     return null;
+  }
+
+  getRunesInfo() async {
+    final dio = Dio();
+    final client = RunesRestClient(dio);
+    try {
+      List<RuneMain> response = await client.getRunesJson();
+      _runesInfo = response;
+    } catch (e) {
+      print(e); //isError
+    }
+    notifyListeners();
   }
 
   Future<void> fetchMatchData(List<String> matchesIds) async {

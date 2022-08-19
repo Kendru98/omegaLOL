@@ -6,13 +6,9 @@ part 'summoner.g.dart';
 class Summoner {
   Summoner({
     required this.puuid,
-    required this.gameName,
-    required this.tagLine,
   });
 
   String puuid;
-  String gameName;
-  String tagLine;
 
   factory Summoner.fromJson(Map<String, dynamic> json) =>
       _$SummonerFromJson(json);

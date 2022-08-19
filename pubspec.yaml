@@ -23,6 +23,9 @@ dependencies:
   json_annotation: ^4.6.0
   equatable: ^2.0.3
   tuple: ^2.0.0
+  cached_network_image: ^3.2.0
+  intl: ^0.17.0
+  linter: ^1.27.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -38,4 +41,8 @@ flutter:
   uses-material-design: true
   assets:
     - icons/
+    - icons/champion/
+    - icons/spell/
+    - icons/styles/
+  
   

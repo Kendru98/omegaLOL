@@ -29,8 +29,6 @@ class _SearchFieldState extends State<SearchField> {
 
   @override
   Widget build(BuildContext context) {
-    final provider = context.read<MatchesProvider>();
-
     return Container(
       width: 600,
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -41,19 +39,15 @@ class _SearchFieldState extends State<SearchField> {
           Expanded(
             child: TextField(
               controller: nicknameController,
-              onSubmitted: (nickname) async {
-                await provider.getPuuid(
-                  nickname,
-                  provider.currentServer,
-                );
-                await provider.getMatchesIds();
+              onSubmitted: (nickname) => initUser(context, nickname, () {
+                if (!mounted) return;
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => const HomePage(),
                   ),
                 );
-              },
+              }),
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(16),
@@ -71,4 +65,13 @@ class _SearchFieldState extends State<SearchField> {
       ),
     );
   }
+}
+
+Future<void> initUser(
+    BuildContext context, String nickname, VoidCallback onSuccess) async {
+  final provider = context.read<MatchesProvider>();
+  await provider.getPuuid(nickname, provider.currentServer);
+  await provider.getMatchesIds();
+  await provider.getRunesInfo();
+  onSuccess.call();
 }

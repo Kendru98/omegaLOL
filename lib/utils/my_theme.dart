@@ -11,30 +11,7 @@ class MyTheme {
     ),
   );
 
-  static final textdmSans46w700 = GoogleFonts.dmSans(
-    textStyle: const TextStyle(
-      color: MyColors.white,
-      fontSize: 46,
-      fontWeight: FontWeight.w700,
-    ),
-  );
-
-  static final textdmSans46w500 = GoogleFonts.dmSans(
-    textStyle: const TextStyle(
-      color: MyColors.white,
-      fontSize: 46,
-      fontWeight: FontWeight.w500,
-    ),
-  );
-  static final textdmSans46w400 = GoogleFonts.dmSans(
-    textStyle: const TextStyle(
-      color: MyColors.white,
-      fontSize: 46,
-      fontWeight: FontWeight.w400,
-    ),
-  );
-
-  static final textdmSans14w400 = GoogleFonts.dmSans(
+  static final dmSans14w400 = GoogleFonts.dmSans(
     textStyle: const TextStyle(
       color: Colors.black,
       fontSize: 14,
@@ -42,32 +19,34 @@ class MyTheme {
     ),
   );
 
-  static final textPoppins46w700 = GoogleFonts.poppins(
+  static final textTitle16w700 = GoogleFonts.poppins(
     textStyle: const TextStyle(
       color: MyColors.white,
-      fontSize: 46,
+      fontSize: 16,
       fontWeight: FontWeight.w700,
     ),
   );
 
-  static final textTitle16w700 = GoogleFonts.poppins(
+  static final textTitle16w600G = GoogleFonts.poppins(
     textStyle: const TextStyle(
-      color: MyColors.white,
-      fontSize: 18,
+      color: Colors.green,
+      fontSize: 16,
       fontWeight: FontWeight.w700,
     ),
   );
-  static final textPoppins46w500 = GoogleFonts.poppins(
+
+  static final textTitle16w600R = GoogleFonts.poppins(
     textStyle: const TextStyle(
-      color: MyColors.white,
-      fontSize: 46,
-      fontWeight: FontWeight.w500,
+      color: Colors.red,
+      fontSize: 16,
+      fontWeight: FontWeight.w700,
     ),
   );
-  static final textPoppins46w400 = GoogleFonts.poppins(
+
+  static final textTitle16w400 = GoogleFonts.poppins(
     textStyle: const TextStyle(
       color: MyColors.white,
-      fontSize: 46,
+      fontSize: 16,
       fontWeight: FontWeight.w400,
     ),
   );

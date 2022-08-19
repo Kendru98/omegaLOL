@@ -26,18 +26,18 @@ class PickServer extends StatelessWidget {
               ),
               Text(
                 provider.currentServer.toUpperCase(),
-                style: MyTheme.textdmSans14w400,
+                style: MyTheme.dmSans14w400,
               )
             ],
           ),
           itemBuilder: (context) => [
             PopupMenuItem(
               value: Servers.eune,
-              child: Text('EUNE', style: MyTheme.textdmSans14w400),
+              child: Text('EUNE', style: MyTheme.dmSans14w400),
             ),
             PopupMenuItem(
               value: Servers.euw,
-              child: Text('EUW', style: MyTheme.textdmSans14w400),
+              child: Text('EUW', style: MyTheme.dmSans14w400),
             ),
           ],
           onSelected: (Servers server) {
