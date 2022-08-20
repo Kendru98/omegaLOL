@@ -16,8 +16,9 @@ class ElementContainer extends StatelessWidget {
       margin: const EdgeInsets.all(16),
       padding: EdgeInsets.all(padding),
       decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(20)),
-          color: MyColors.mainContainers),
+        borderRadius: BorderRadius.all(Radius.circular(20)),
+        color: MyColors.mainContainers,
+      ),
       child: child,
     );
   }

@@ -4,51 +4,27 @@ import 'package:omega_lul/models/runes/rune.dart';
 import 'package:omega_lul/models/runes/rune_main.dart';
 import 'package:omega_lul/models/runes/slot.dart';
 import 'package:omega_lul/provider.dart/matches_provider.dart';
+import 'package:omega_lul/utils/my_theme.dart';
 import 'package:provider/provider.dart';
 import 'package:collection/collection.dart';
 
-class DataConversion {
-  static Map<int, String> summonerSpells = {
-    21: 'SummonerBarrier.png',
-    1: 'SummonerBoost.png',
-    14: 'SummonerDot.png',
-    3: 'SummonerExhaust.png',
-    4: 'SummonerFlash.png',
-    6: 'SummonerHaste.png',
-    7: 'SummonerHeal.png',
-    13: 'SummonerMana.png',
-    30: 'SummonerPoroRecall.png!',
-    31: 'SummonerPoroThrow.png',
-    11: 'SummonerSmite.png',
-    39: 'SummonerSnowball.png',
-    32: 'SummonerSnowURFSnowball_Mark.png',
-    12: 'SummonerTeleport.png',
-    54: 'Placeholder',
-    55: 'Placeholder and Attack-Smite', //todo
-  };
-  static Map<int, String> runesPaths = {
-    21: 'SummonerBarrier.png',
-    1: 'SummonerBoost.png',
-    14: 'SummonerDot.png',
-    3: 'SummonerExhaust.png',
-    4: 'SummonerFlash.png',
-    6: 'SummonerHaste.png',
-    7: 'SummonerHeal.png',
-    13: 'SummonerMana.png',
-    30: 'SummonerPoroRecall.png!',
-    31: 'SummonerPoroThrow.png',
-    11: 'SummonerSmite.png',
-    39: 'SummonerSnowball.png',
-    32: 'SummonerSnowURFSnowball_Mark.png',
-    12: 'SummonerTeleport.png',
-    54: 'Placeholder',
-    55: 'Placeholder and Attack-Smite', //todo
-  };
+extension ChooseColor on double {
+  TextStyle kdaColor() {
+    if (this < 2.50) {
+      return MyTheme.textKDAGrey;
+    } else if (this > 2.50 && this < 5.00) {
+      return MyTheme.textKDAGreen;
+    } else {
+      return MyTheme.textKDAGold;
+    }
+  }
+}
 
-  String readTimestamp(int timestamp) {
+extension ElapsedTime on int {
+  String timeLabel() {
     var now = DateTime.now();
     var format = DateFormat('HH:mm a');
-    var date = DateTime.fromMillisecondsSinceEpoch(timestamp);
+    var date = DateTime.fromMillisecondsSinceEpoch(this);
     var diff = now.difference(date);
     var time = '';
 
@@ -73,6 +49,30 @@ class DataConversion {
 
     return time;
   }
+}
+
+class DataConversion {
+  static Map<int, String> summonerSpells = {
+    21: 'SummonerBarrier.png',
+    1: 'SummonerBoost.png',
+    14: 'SummonerDot.png',
+    3: 'SummonerExhaust.png',
+    4: 'SummonerFlash.png',
+    6: 'SummonerHaste.png',
+    7: 'SummonerHeal.png',
+    13: 'SummonerMana.png',
+    30: 'SummonerPoroRecall.png!',
+    31: 'SummonerPoroThrow.png',
+    11: 'SummonerSmite.png',
+    39: 'SummonerSnowball.png',
+    32: 'SummonerSnowURFSnowball_Mark.png',
+    12: 'SummonerTeleport.png',
+    54: 'Placeholder',
+    55: 'Placeholder and Attack-Smite', //todo
+  };
+  static Map<int, String> runesPaths = {
+    //TODO
+  };
 
   static String choosePath(int mainIconId, int iconId, BuildContext context) {
     final provider = context.read<MatchesProvider>();
@@ -80,8 +80,6 @@ class DataConversion {
     try {
       List<RuneMain> runesList = provider.runesInfo;
       String iconPath = '';
-
-      //w runes tylko za 1 razem 4 potem 3
 
       RuneMain? test =
           runesList.firstWhereOrNull((element) => element.id == mainIconId);
@@ -97,12 +95,10 @@ class DataConversion {
         }
       }
 
-      //print(iconPath);
       return iconPath;
     } catch (e) {
       print(e);
     }
-//8008
     return '';
   }
 
@@ -112,9 +108,6 @@ class DataConversion {
     try {
       List<RuneMain> runesList = provider.runesInfo;
       String iconPath = '';
-
-      //w runes tylko za 1 razem 4 potem 3
-
       RuneMain? test =
           runesList.firstWhereOrNull((element) => element.id == iconId);
 

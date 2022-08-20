@@ -11,7 +11,7 @@ Participant _$ParticipantFromJson(Map<String, dynamic> json) => Participant(
       baronKills: json['baronKills'] as int,
       basicPings: json['basicPings'] as int,
       bountyLevel: json['bountyLevel'] as int,
-      challenges: (json['challenges'] as Map<String, dynamic>).map(
+      challenges: (json['challenges'] as Map<String, dynamic>?)?.map(
         (k, e) => MapEntry(k, (e as num).toDouble()),
       ),
       champExperience: json['champExperience'] as int,

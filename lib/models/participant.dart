@@ -25,7 +25,7 @@ class Participant {
     required this.baronKills,
     required this.basicPings,
     required this.bountyLevel,
-    required this.challenges,
+    this.challenges, //asd
     required this.champExperience,
     required this.champLevel,
     required this.championId,
@@ -134,7 +134,7 @@ class Participant {
   int baronKills;
   int basicPings;
   int bountyLevel;
-  Map<String, double> challenges;
+  Map<String, double>? challenges;
   int champExperience;
   int champLevel;
   int championId;

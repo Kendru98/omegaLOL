@@ -31,7 +31,7 @@ class MyTheme {
     textStyle: const TextStyle(
       color: Colors.green,
       fontSize: 16,
-      fontWeight: FontWeight.w700,
+      fontWeight: FontWeight.w600,
     ),
   );
 
@@ -39,7 +39,49 @@ class MyTheme {
     textStyle: const TextStyle(
       color: Colors.red,
       fontSize: 16,
-      fontWeight: FontWeight.w700,
+      fontWeight: FontWeight.w600,
+    ),
+  );
+  static final textKDGold = GoogleFonts.poppins(
+    textStyle: const TextStyle(
+      color: Color.fromARGB(255, 250, 227, 16),
+      fontSize: 16,
+      fontWeight: FontWeight.w400,
+    ),
+  );
+  static final textKDAGrey = GoogleFonts.poppins(
+    textStyle: const TextStyle(
+      color: Color.fromARGB(255, 108, 108, 117),
+      fontSize: 16,
+      fontWeight: FontWeight.w400,
+    ),
+  );
+  static final textKDAGreen = GoogleFonts.poppins(
+    textStyle: const TextStyle(
+      color: Color.fromARGB(255, 10, 187, 7),
+      fontSize: 16,
+      fontWeight: FontWeight.w400,
+    ),
+  );
+  static final textKDAGold = GoogleFonts.poppins(
+    textStyle: const TextStyle(
+      color: Color.fromARGB(255, 250, 227, 16),
+      fontSize: 16,
+      fontWeight: FontWeight.w400,
+    ),
+  );
+  static final textTitle16w600Y = GoogleFonts.poppins(
+    textStyle: const TextStyle(
+      color: Colors.amber,
+      fontSize: 16,
+      fontWeight: FontWeight.w600,
+    ),
+  );
+  static final textTitle16w600W = GoogleFonts.poppins(
+    textStyle: const TextStyle(
+      color: Colors.white,
+      fontSize: 16,
+      fontWeight: FontWeight.w600,
     ),
   );
 

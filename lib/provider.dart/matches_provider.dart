@@ -42,7 +42,7 @@ class MatchesProvider extends ChangeNotifier {
     }
     fetchMatchData(_matchesIds);
 
-    print(matchDataList);
+    // print(matchDataList);
     return null;
   }
 
@@ -59,6 +59,7 @@ class MatchesProvider extends ChangeNotifier {
   }
 
   Future<void> fetchMatchData(List<String> matchesIds) async {
+    print(matchesIds);
     final dio = Dio(
       BaseOptions(
         headers: {
@@ -72,7 +73,7 @@ class MatchesProvider extends ChangeNotifier {
     try {
       for (String matchId in matchesIds) {
         MainData response = await client.getMatchDetails(matchId);
-        matchListData.add(response.info);
+        matchListData.add(response.info); //info mam
       }
       _matchData[_userPuuid] = matchListData;
     } catch (e) {

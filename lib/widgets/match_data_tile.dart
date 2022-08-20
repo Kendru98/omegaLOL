@@ -4,8 +4,8 @@ import 'package:omega_lul/models/info.dart';
 import 'package:omega_lul/models/participant.dart';
 import 'package:omega_lul/provider.dart/matches_provider.dart';
 import 'package:omega_lul/utils/data_conversion.dart';
-import 'package:omega_lul/utils/my_colors.dart';
 import 'package:omega_lul/utils/my_theme.dart';
+import 'package:omega_lul/widgets/team_list.dart';
 import 'package:provider/provider.dart';
 
 class MatchDataTile extends StatelessWidget {
@@ -18,15 +18,12 @@ class MatchDataTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dataConv = DataConversion();
     final provider = context.read<MatchesProvider>();
     int userIndex = matchData.participants
         .indexWhere((element) => element.puuid == provider.userPuuid);
     Participant currentPart = matchData.participants[userIndex];
+    Duration matchTime = Duration(minutes: matchData.gameDuration);
 
-    print(
-      'https://ddragon.canisback.com/img/${DataConversion.choosePath(currentPart.perks.styles[1].style, currentPart.perks.styles[1].selections[1].perk, context)}',
-    );
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -49,11 +46,11 @@ class MatchDataTile extends StatelessWidget {
                       style: MyTheme.textTitle16w600R,
                     ),
               Text(
-                ('${Duration(minutes: matchData.gameDuration).toString().substring(0, 5)}m'),
+                ('${matchTime.toString().substring(0, 5)}m'),
                 style: MyTheme.textTitle16w400,
               ),
               Text(
-                dataConv.readTimestamp(matchData.gameEndTimestamp),
+                matchData.gameEndTimestamp.timeLabel(),
                 style: MyTheme.textTitle16w400,
               )
             ],
@@ -98,7 +95,7 @@ class MatchDataTile extends StatelessWidget {
                   child: CachedNetworkImage(
                     width: 24,
                     height: 24,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.fill,
                     imageUrl:
                         'https://ddragon.canisback.com/img/${DataConversion.choosePath(currentPart.perks.styles[0].style, currentPart.perks.styles[0].selections[0].perk, context)}',
                   ),
@@ -112,7 +109,7 @@ class MatchDataTile extends StatelessWidget {
                   child: CachedNetworkImage(
                     width: 24,
                     height: 24,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.fill,
                     imageUrl:
                         'https://ddragon.canisback.com/img/${DataConversion.choosePathSecond(currentPart.perks.styles[1].style, context)}',
                   ),
@@ -121,23 +118,63 @@ class MatchDataTile extends StatelessWidget {
             ),
           ],
         ),
+        SizedBox(
+          width: 130,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(
+                child: RichText(
+                    text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: '${currentPart.kills}',
+                      style: MyTheme.textTitle16w600G,
+                    ),
+                    TextSpan(text: '/', style: MyTheme.textTitle16w600W),
+                    TextSpan(
+                      text: '${currentPart.deaths}',
+                      style: MyTheme.textTitle16w600R,
+                    ),
+                    TextSpan(text: '/', style: MyTheme.textTitle16w600W),
+                    TextSpan(
+                      text: '${currentPart.assists}',
+                      style: MyTheme.textTitle16w600Y,
+                    ),
+                  ],
+                )),
+              ),
+              SizedBox(
+                child: Text(
+                  '${((currentPart.kills + currentPart.assists) / currentPart.deaths).toStringAsPrecision(3)} KDA',
+                  style: ((currentPart.kills + currentPart.assists) /
+                          currentPart.deaths)
+                      .kdaColor(),
+                ),
+              )
+            ],
+          ),
+        ),
         Column(
           children: [
             Text(
-              '${currentPart.kills} / ${currentPart.deaths} / ${currentPart.assists}',
-              style: MyTheme.textTitle16w600G,
+              'CS: ${currentPart.totalMinionsKilled} (${(currentPart.totalMinionsKilled / matchTime.inHours).toStringAsPrecision(2)})',
+              style: MyTheme.textTitle16w400,
             ),
+            if (matchData.queueId.queueTranslation() != 'ARAM')
+              Text(
+                'Vision: ${currentPart.visionScore}',
+                style: MyTheme.textTitle16w400,
+              ),
             Text(
-              '${((currentPart.kills + currentPart.assists) / currentPart.deaths).toStringAsPrecision(2)} KDA',
-              style: MyTheme.textTitle16w600R,
-            )
+              '${(((currentPart.kills + currentPart.assists) / matchData.teams[matchData.teams.indexWhere((element) => element.teamId == currentPart.teamId)].objectives.champion.kills) * 100).toStringAsPrecision(3)}% K.P',
+              style: MyTheme.textTitle16w400,
+            ),
           ],
-        )
+        ),
+        const SizedBox(width: 30),
+        TeamList(partList: matchData.participants),
       ],
     );
   }
 }
-// P/Kill 46%
-// Control Ward 3
-// CS 128 (3.8)
-// Gold 3
