@@ -26,6 +26,24 @@ class DataConversion {
     54: 'Placeholder',
     55: 'Placeholder and Attack-Smite', //todo
   };
+  static Map<int, String> runesPaths = {
+    21: 'SummonerBarrier.png',
+    1: 'SummonerBoost.png',
+    14: 'SummonerDot.png',
+    3: 'SummonerExhaust.png',
+    4: 'SummonerFlash.png',
+    6: 'SummonerHaste.png',
+    7: 'SummonerHeal.png',
+    13: 'SummonerMana.png',
+    30: 'SummonerPoroRecall.png!',
+    31: 'SummonerPoroThrow.png',
+    11: 'SummonerSmite.png',
+    39: 'SummonerSnowball.png',
+    32: 'SummonerSnowURFSnowball_Mark.png',
+    12: 'SummonerTeleport.png',
+    54: 'Placeholder',
+    55: 'Placeholder and Attack-Smite', //todo
+  };
 
   String readTimestamp(int timestamp) {
     var now = DateTime.now();

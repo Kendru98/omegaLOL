@@ -4,6 +4,7 @@ import 'package:omega_lul/models/info.dart';
 import 'package:omega_lul/models/participant.dart';
 import 'package:omega_lul/provider.dart/matches_provider.dart';
 import 'package:omega_lul/utils/data_conversion.dart';
+import 'package:omega_lul/utils/my_colors.dart';
 import 'package:omega_lul/utils/my_theme.dart';
 import 'package:provider/provider.dart';
 
@@ -89,23 +90,32 @@ class MatchDataTile extends StatelessWidget {
             ),
             Row(
               children: [
-                CachedNetworkImage(
-// P/Kill 46%
-// Control Ward 3
-// CS 128 (3.8)
-// Gold 3
-                  width: 24,
-                  height: 24,
-                  fit: BoxFit.cover,
-                  imageUrl:
-                      'https://ddragon.canisback.com/img/${DataConversion.choosePath(currentPart.perks.styles[0].style, currentPart.perks.styles[0].selections[0].perk, context)}',
+                Container(
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(4)),
+                    color: Color.fromRGBO(61, 61, 82, 1),
+                  ),
+                  child: CachedNetworkImage(
+                    width: 24,
+                    height: 24,
+                    fit: BoxFit.cover,
+                    imageUrl:
+                        'https://ddragon.canisback.com/img/${DataConversion.choosePath(currentPart.perks.styles[0].style, currentPart.perks.styles[0].selections[0].perk, context)}',
+                  ),
                 ),
-                CachedNetworkImage(
-                  width: 24,
-                  height: 24,
-                  fit: BoxFit.cover,
-                  imageUrl:
-                      'https://ddragon.canisback.com/img/${DataConversion.choosePathSecond(currentPart.perks.styles[1].style, context)}',
+                const SizedBox(width: 2),
+                Container(
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(4)),
+                    color: Color.fromRGBO(61, 61, 82, 1),
+                  ),
+                  child: CachedNetworkImage(
+                    width: 24,
+                    height: 24,
+                    fit: BoxFit.cover,
+                    imageUrl:
+                        'https://ddragon.canisback.com/img/${DataConversion.choosePathSecond(currentPart.perks.styles[1].style, context)}',
+                  ),
                 ),
               ],
             ),
@@ -127,3 +137,7 @@ class MatchDataTile extends StatelessWidget {
     );
   }
 }
+// P/Kill 46%
+// Control Ward 3
+// CS 128 (3.8)
+// Gold 3

@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => MatchesProvider(),
-        )
+        ),
       ],
       child: const MaterialApp(
         title: 'Omega LOL',
