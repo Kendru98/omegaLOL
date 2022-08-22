@@ -6,11 +6,12 @@ part 'user_api.g.dart';
 
 @RestApi(
     baseUrl:
-        "https://europe.api.riotgames.com/riot/account/v1/accounts/by-riot-id/")
+        "https://") //euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/
 abstract class UserRestClient {
   factory UserRestClient(Dio dio, {String baseUrl}) = _UserRestClient;
 
-  @GET("{username}/{server}")
+  @GET(
+      "{server}.api.riotgames.com/lol/summoner/v4/summoners/by-name/{username}")
   Future<Summoner> getUserUid(
       @Path('username') String username, @Path('server') String server);
 

@@ -38,6 +38,7 @@ class HomePage extends StatelessWidget {
                           return const CircularProgressIndicator();
                         }
                         return ListView.builder(
+                          primary: false,
                           shrinkWrap: true,
                           itemCount: matchData.item2.length,
                           itemBuilder: (context, matchIndex) {

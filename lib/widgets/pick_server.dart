@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:omega_lul/provider.dart/matches_provider.dart';
+import 'package:omega_lul/utils/data_conversion.dart';
 import 'package:omega_lul/utils/my_theme.dart';
 import 'package:omega_lul/widgets/search_field.dart';
 import 'package:provider/provider.dart';
@@ -25,23 +26,22 @@ class PickServer extends StatelessWidget {
                 image: AssetImage('icons/choose_server.png'),
               ),
               Text(
-                provider.currentServer.toUpperCase(),
+                provider.currentServer.enumToString(),
                 style: MyTheme.dmSans14w400,
-              )
+              ),
             ],
           ),
-          itemBuilder: (context) => [
-            PopupMenuItem(
-              value: Servers.eune,
-              child: Text('EUNE', style: MyTheme.dmSans14w400),
-            ),
-            PopupMenuItem(
-              value: Servers.euw,
-              child: Text('EUW', style: MyTheme.dmSans14w400),
-            ),
-          ],
+          itemBuilder: (context) => Servers.values
+              .map(
+                (server) => PopupMenuItem(
+                  value: server,
+                  child:
+                      Text(server.enumToString(), style: MyTheme.dmSans14w400),
+                ),
+              )
+              .toList(),
           onSelected: (Servers server) {
-            provider.setServer(server.name.toUpperCase());
+            provider.setServer(server);
           },
         );
       },

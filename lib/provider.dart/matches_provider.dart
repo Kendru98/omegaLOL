@@ -7,13 +7,15 @@ import 'package:omega_lul/apikey.dart';
 import 'package:omega_lul/models/main_data.dart';
 import 'package:omega_lul/models/info.dart';
 import 'package:omega_lul/models/runes/rune_main.dart';
+import 'package:omega_lul/models/summoner.dart';
+import 'package:omega_lul/widgets/search_field.dart';
 
 class MatchesProvider extends ChangeNotifier {
   final List<Info> _matchDataList = [];
   List<Info> get matchDataList => _matchDataList;
 
-  String _currentServer = 'eune';
-  String get currentServer => _currentServer;
+  Servers _currentServer = Servers.eun1;
+  Servers get currentServer => _currentServer;
 
   final Map<String, bool> _dataLoading = {};
   Map<String, bool> get dataLoading => _dataLoading;
@@ -98,7 +100,7 @@ class MatchesProvider extends ChangeNotifier {
     final client = MatchesRestClient(dio);
 
     try {
-      var response = await client.getMatchesId(userPuuid);
+      List<String> response = await client.getMatchesId(userPuuid);
       _matchesIds = response;
       notifyListeners();
     } catch (e) {
@@ -106,7 +108,7 @@ class MatchesProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> getPuuid(String username, String server) async {
+  Future<void> getSummoner(String username, Servers server) async {
     final dio = Dio(
       BaseOptions(
         headers: {
@@ -117,8 +119,8 @@ class MatchesProvider extends ChangeNotifier {
     );
     final client = UserRestClient(dio);
     try {
-      var response = await client.getUserUid(username, server);
-      _userPuuid = response.puuid;
+      Summoner response = await client.getUserUid(username, server.name);
+      _userPuuid = response.puuid; //fullaccount
       print(_userPuuid);
     } catch (e) {
       print(e);
@@ -126,7 +128,7 @@ class MatchesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setServer(String server) {
+  void setServer(Servers server) {
     _currentServer = server;
     notifyListeners();
   }

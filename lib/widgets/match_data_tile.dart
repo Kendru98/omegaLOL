@@ -43,7 +43,8 @@ class MatchDataTile extends StatelessWidget {
                     )
                   : Text(
                       'LOST',
-                      style: MyTheme.textTitle16w600R,
+                      style:
+                          MyTheme.textTitle16w600G.copyWith(color: Colors.red),
                     ),
               Text(
                 ('${matchTime.toString().substring(0, 5)}m'),
@@ -65,7 +66,7 @@ class MatchDataTile extends StatelessWidget {
                   width: 24,
                   height: 24,
                   image: AssetImage(
-                      'icons/spell/${DataConversion.summonerSpells[currentPart.summoner1Id]}'),
+                      'icons/spell/${DataConversion.summonerSpells[currentPart.summoner1Id] ?? DataConversion.summonerSpells[54]}'),
                 ),
                 Image(
                   width: 24,
@@ -77,11 +78,12 @@ class MatchDataTile extends StatelessWidget {
             ),
             Row(
               children: [
-                CachedNetworkImage(
+                Image(
                   width: 48,
                   height: 48,
-                  imageUrl:
-                      'http://ddragon.leagueoflegends.com/cdn/12.15.1/img/champion/${currentPart.championName}.png',
+                  image: AssetImage(
+                    currentPart.championName.chempPath(),
+                  ),
                 ),
               ],
             ),
@@ -92,13 +94,12 @@ class MatchDataTile extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(4)),
                     color: Color.fromRGBO(61, 61, 82, 1),
                   ),
-                  child: CachedNetworkImage(
-                    width: 24,
-                    height: 24,
-                    fit: BoxFit.fill,
-                    imageUrl:
-                        'https://ddragon.canisback.com/img/${DataConversion.choosePath(currentPart.perks.styles[0].style, currentPart.perks.styles[0].selections[0].perk, context)}',
-                  ),
+                  child: Image(
+                      width: 24,
+                      height: 24,
+                      fit: BoxFit.fill,
+                      image: AssetImage(
+                          'icons/styles/${DataConversion.runesPaths[currentPart.perks.styles.first.style]}')),
                 ),
                 const SizedBox(width: 2),
                 Container(
@@ -106,12 +107,12 @@ class MatchDataTile extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(4)),
                     color: Color.fromRGBO(61, 61, 82, 1),
                   ),
-                  child: CachedNetworkImage(
+                  child: Image(
                     width: 24,
                     height: 24,
                     fit: BoxFit.fill,
-                    imageUrl:
-                        'https://ddragon.canisback.com/img/${DataConversion.choosePathSecond(currentPart.perks.styles[1].style, context)}',
+                    image: AssetImage(
+                        'icons/styles/${DataConversion.runesPaths[currentPart.perks.styles.first.selections.first.perk]}'),
                   ),
                 ),
               ],
@@ -134,19 +135,21 @@ class MatchDataTile extends StatelessWidget {
                     TextSpan(text: '/', style: MyTheme.textTitle16w600W),
                     TextSpan(
                       text: '${currentPart.deaths}',
-                      style: MyTheme.textTitle16w600R,
+                      style:
+                          MyTheme.textTitle16w600G.copyWith(color: Colors.red),
                     ),
                     TextSpan(text: '/', style: MyTheme.textTitle16w600W),
                     TextSpan(
                       text: '${currentPart.assists}',
-                      style: MyTheme.textTitle16w600Y,
+                      style: MyTheme.textTitle16w600G
+                          .copyWith(color: Colors.amber),
                     ),
                   ],
                 )),
               ),
               SizedBox(
                 child: Text(
-                  '${((currentPart.kills + currentPart.assists) / currentPart.deaths).toStringAsPrecision(3)} KDA',
+                  '${((currentPart.kills + currentPart.assists) / currentPart.deaths).toStringAsFixed(2)} KDA',
                   style: ((currentPart.kills + currentPart.assists) /
                           currentPart.deaths)
                       .kdaColor(),
@@ -155,24 +158,26 @@ class MatchDataTile extends StatelessWidget {
             ],
           ),
         ),
-        Column(
-          children: [
-            Text(
-              'CS: ${currentPart.totalMinionsKilled} (${(currentPart.totalMinionsKilled / matchTime.inHours).toStringAsPrecision(2)})',
-              style: MyTheme.textTitle16w400,
-            ),
-            if (matchData.queueId.queueTranslation() != 'ARAM')
+        SizedBox(
+          width: 130,
+          child: Column(
+            children: [
               Text(
-                'Vision: ${currentPart.visionScore}',
+                'CS: ${currentPart.totalMinionsKilled} (${(currentPart.totalMinionsKilled / matchTime.inHours).toStringAsPrecision(2)})',
                 style: MyTheme.textTitle16w400,
               ),
-            Text(
-              '${(((currentPart.kills + currentPart.assists) / matchData.teams[matchData.teams.indexWhere((element) => element.teamId == currentPart.teamId)].objectives.champion.kills) * 100).toStringAsPrecision(3)}% K.P',
-              style: MyTheme.textTitle16w400,
-            ),
-          ],
+              if (matchData.queueId.queueTranslation() != 'ARAM')
+                Text(
+                  'Vision: ${currentPart.visionScore}',
+                  style: MyTheme.textTitle16w400,
+                ),
+              Text(
+                '${(((currentPart.kills + currentPart.assists) / matchData.teams[matchData.teams.indexWhere((element) => element.teamId == currentPart.teamId)].objectives.champion.kills) * 100).toStringAsPrecision(3)}% K.P',
+                style: MyTheme.textTitle16w400,
+              ),
+            ],
+          ),
         ),
-        const SizedBox(width: 30),
         TeamList(partList: matchData.participants),
       ],
     );

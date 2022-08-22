@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:omega_lul/utils/my_theme.dart';
+import 'package:omega_lul/widgets/search_field.dart';
 
 class TopBar extends StatelessWidget {
   const TopBar({Key? key}) : super(key: key);
@@ -7,16 +8,11 @@ class TopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 150,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: const [
           _TopBarItem(title: 'Stats'),
-          Icon(
-            Icons.abc_sharp,
-            size: 40,
-            color: Colors.white,
-          ),
+          SearchField(),
         ],
       ),
     );

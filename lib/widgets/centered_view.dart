@@ -9,9 +9,9 @@ class CenteredView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(
-        horizontal: 70, //Platform.isAndroid ? 16 : 70,
-        vertical: 60, //Platform.isAndroid ? 16 : 60,
-      ),
+          // horizontal: 70, //Platform.isAndroid ? 16 : 70,
+          // vertical: 60, //Platform.isAndroid ? 16 : 60,
+          ),
       alignment: Alignment.center,
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 800),

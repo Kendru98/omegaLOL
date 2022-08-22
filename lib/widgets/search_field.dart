@@ -6,8 +6,17 @@ import 'package:omega_lul/widgets/pick_server.dart';
 import 'package:provider/provider.dart';
 
 enum Servers {
-  eune,
-  euw,
+  br1,
+  eun1,
+  euw1,
+  jp1,
+  kr,
+  la1,
+  la2,
+  na1,
+  oc1,
+  ru,
+  tr1,
 }
 
 class SearchField extends StatefulWidget {
@@ -19,7 +28,7 @@ class SearchField extends StatefulWidget {
 
 class _SearchFieldState extends State<SearchField> {
   final nicknameController = TextEditingController();
-  String currentServer = Servers.eune.name.toUpperCase();
+  String currentServer = Servers.eun1.name.toUpperCase();
 
   @override
   void dispose() {
@@ -30,7 +39,7 @@ class _SearchFieldState extends State<SearchField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 600,
+      width: 500,
       padding: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
@@ -72,7 +81,7 @@ class _SearchFieldState extends State<SearchField> {
 Future<void> initUser(
     BuildContext context, String nickname, VoidCallback onSuccess) async {
   final provider = context.read<MatchesProvider>();
-  await provider.getPuuid(nickname, provider.currentServer);
+  await provider.getSummoner(nickname, provider.currentServer);
   await provider.getMatchesIds();
   await provider.getRunesInfo();
   onSuccess.call();

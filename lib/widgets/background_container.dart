@@ -5,12 +5,9 @@ class BackgroundContainer extends StatelessWidget {
   const BackgroundContainer({
     Key? key,
     this.child,
-    this.topPadding = 0,
-    this.topRadius = 0,
   }) : super(key: key);
   final Widget? child;
-  final double topPadding;
-  final double topRadius;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,7 +15,7 @@ class BackgroundContainer extends StatelessWidget {
         left: 16,
         right: 16,
         bottom: 16,
-        top: 16,
+        top: 24,
       ),
       decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(30)),
